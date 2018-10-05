@@ -32,7 +32,7 @@ export default class App extends Component {
       <Router>
         <Scene key="root">
           <Scene key="home" component={Home} title="Home"/>
-          <Scene key="chat" component={Chat} title="Chat"/>
+          <Scene key="chat" component={Chat} title="Live Chat"/>
         </Scene>
       </Router>      
     );

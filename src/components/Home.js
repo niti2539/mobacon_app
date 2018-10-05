@@ -13,21 +13,38 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Home extends Component {
     render() {
       return (
-        <View>
-            <Text>Home</Text>
-            <TouchableOpacity onPress={()=>{Actions.chat()}}>
-                <Text>Go to Chat</Text>
-            </TouchableOpacity>
+        <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}>
+            <Text
+              style={{
+                textAlign: "center",
+                fontSize: 20,
+                color: "#6200EE",
+                marginTop: 10
+                
+                }}
+            >
+              This feature is only {"\n"}
+              available in pro mode. {"\n"}
+              Please upgrade to pro {"\n"}
+              and you will get {"\n"}
+              -Live chat {"\n"}
+              -Report history {"\n"}
+              -Etc
+            </Text>
             <Button
               onPress={()=>{Actions.chat()}}
-              icon={
-                <Icon
-                  name='arrow-right'
-                  size={15}
-                  color='white'
-                />
+              buttonStyle={
+                {
+                  backgroundColor: "#6200EE",
+                  marginBottom: 10
+                  
+                }
               }
-              title='BUTTON WITH ICON COMPONENT'
+              title='UPGRADE YO PRO'
             />
         </View>
 

@@ -3,36 +3,79 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage 
 } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat'
+import { GiftedChat } from 'react-native-gifted-chat';
+import firebase from 'firebase';
+
 
 export default class Chat extends Component {
   state = {
     messages: [],
+    test:""
   }
 
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
+    var config = {
+      apiKey: "AIzaSyD4-e1qmtQdZR0X0Q7b8X-0CUoyBfckcFQ",
+      authDomain: "mobacon-117e8.firebaseapp.com",
+      databaseURL: "https://mobacon-117e8.firebaseio.com",
+      projectId: "mobacon-117e8",
+      storageBucket: "mobacon-117e8.appspot.com",
+      messagingSenderId: "283582925998"
+    };
+    firebase.initializeApp(config);
+
+    AsyncStorage.getItem("UserToken").then((value)=>{
+      
+      if(value == undefined){
+        let key = firebase.database().ref().child('message').push().key;
+        AsyncStorage.setItem("UserToken",key);
+        AsyncStorage.getItem("UserToken").then((value)=>{
+          this.setState({
+            UserToken: value
+          })
+        });
+      }
+      this.setState({
+        UserToken: value,
+      })
+      this.onLoadedData();
+      
+    });
+  }
+
+  onLoadedData(){
+    firebase.database().ref('message/'+this.state.UserToken).on('value',(snepshot)=>{
+      let data = snepshot.val();
+      if(data != null){
+        let arr = [];
+        for(i in data){
+          arr.push(data[i]);
+        }
+        arr = arr.reverse();
+  
+        this.setState({
+          messages: arr
+        })
+      }
+      // console.log(data);
     })
   }
 
+  
   onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
+    
+    firebase.database().ref('message/'+this.state.UserToken).push(messages[0]);
+    if(this.state.messages == undefined){
+      this.onLoadedData();
+    }
+    
+    
+    // this.setState(previousState => ({
+    //   messages: GiftedChat.append(previousState.messages, messages),
+    // }))
   }
 
   render() {
@@ -41,12 +84,13 @@ export default class Chat extends Component {
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: this.state.UserToken,
           name: 'React Native',
           avatar: require('Mobacon/asset/img/user.jpg'),
         }}
         showUserAvatar={true}
       />
+
     )
   }
 }
