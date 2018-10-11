@@ -1,59 +1,23 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import {
-  Router,
-  Scene
-} from 'react-native-router-flux';
-
-import Home from "./src/components/Home";
-import Chat from "./src/components/Chat";
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { Provider } from 'react-redux';
+import { YellowBox } from 'react-native';
+import store from './src/Store/index';
+import Route from './src/Router'
+import InitialApp from './src/Controller/InitialController';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader','Setting a timer']);
 
 export default class App extends Component {
+
+  componentDidMount(){
+    new InitialApp();
+  }
+
   render() {
     return (
-      <Router>
-        <Scene key="root">
-          <Scene key="home" component={Home} title="Home"/>
-          <Scene key="chat" component={Chat} title="Live Chat"/>
-        </Scene>
-      </Router>      
+      <Provider store={ store }>
+        <Route/>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
