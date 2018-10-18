@@ -23,9 +23,7 @@ export default class Home extends Component {
                 textAlign: "center",
                 fontSize: 20,
                 color: "#6200EE",
-                marginTop: 10
-                
-                }}
+                marginTop: 10}}
             >
               This feature is only {"\n"}
               available in pro mode. {"\n"}
@@ -35,13 +33,13 @@ export default class Home extends Component {
               -Report history {"\n"}
               -Etc
             </Text>
+
             <Button
               onPress={()=>{Actions.chat()}}
               buttonStyle={
                 {
                   backgroundColor: "#6200EE",
                   marginBottom: 10
-                  
                 }
               }
               title='UPGRADE YO PRO'

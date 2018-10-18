@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
-import { dispatch } from 'redux';
 import { FetchMessage, SendMessage } from '../Controller/ChatController';
 
  
