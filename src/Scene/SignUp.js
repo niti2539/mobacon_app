@@ -1,47 +1,73 @@
 import React, { Component } from 'react';
-import { View, Text, CheckBox } from 'react-native';
+import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { Actions } from 'react-native-router-flux';
 import t from 'tcomb-form-native';
 import FormStyle from '../../asset/StyleSheet/FormStyle';
-import { Wrap, Footer } from '../../asset/StyleSheet/CommonStyle';
+import { Wrap, FooterStyle,FooterBtn } from '../../asset/StyleSheet/CommonStyle';
+import { connect } from 'react-redux';
+import { SignUpAction } from '../Controller/AuthUserController';
+import {  ListItem, CheckBox, Body } from 'native-base';
+import { Actions } from 'react-native-router-flux'
 
 var Form = t.form.Form;
+let signUpStruct = t.struct({
+  phone : t.Number,
+  password : t.String,
+})
 
-export default class SignUp extends Component {
+let options = {
+  fields : {
+    phone :{
+      label: "PHONE NUMBER"
+    },
+    password:{
+      label: "PASSWORD",
+      password : true,
+      secureTextEntry :true,
+    },
+  },
+  stylesheet : FormStyle,
+}
+
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: null,
       termCheck:false
     };
   }
 
+  onChange(value) {
+    this.setState({ value :value });
+  }
+
   termCheck() {
     this.setState({
+      value : this.state.value,
       termCheck:!this.state.termCheck
     })
   }
 
-  render() {
-    let loginStruct = t.struct({
-      phone : t.Number,
-      password : t.String,
-    })
+  async onSignUp(){
+    let value = this.refs.formSignUp.getValue();
+    if(this.state.termCheck == true){
+      if(value){
+        Actions.confirmCode();
+        // let data = await SignUpAction(value.phone,value.password);
 
-    let options = {
-      fields : {
-        phone :{
-          label: "PHONE NUMBER"
-        },
-        password:{
-          label: "PASSWORD",
-          password : true,
-          secureTextEntry :true,
-        },
-      },
-      stylesheet : FormStyle,
+    
+        // console.log(data)
+        /*if(data){
+          this.setState({value:null})
+        }else{
+          this.setState({value:{phone:this.state.value.phone,password:''}})
+        }*/
+       }
     }
+  }
 
+  render() {
     return (
       <View style={Wrap}>
         <View>
@@ -54,37 +80,42 @@ export default class SignUp extends Component {
           > SIGNUP </Text>
           <View style={{padding:12}}>
             <Text
-              style={{width:'85%',
+              style={{width:'70%',
                 fontSize:18,
                 marginBottom:20,
                 color:'#8392A7'}}
             >We need your phone number in order to recommed you a better phone subscription.</Text>
             <Form 
-              ref="formLogin"
-              type={loginStruct}
+              ref="formSignUp"
+              type={signUpStruct}
               options={options}
+              value = { this.state.value }
+              onChange={this.onChange.bind(this)}
             />
             <View >
-              <CheckBox value={this.state.termCheck} onChange={()=>this.termCheck()}/>
-              <Text>
-                <Text>I accept the </Text>
-                <Text style={{fontWeight:'bold',textDecorationLine:'underline'}}>Terms & Conditions</Text>
-              </Text>
+              <ListItem style={{borderBottomWidth:0,marginLeft:0}}>
+                <CheckBox checked={this.state.termCheck} onPress={()=>this.termCheck()} color="green" CheckboxRadius={5} checkboxSize={30} checkboxBgColor='#fff'/>
+                <Body style={{flexDirection: 'row'}}>
+                  <Text  numberOfLines={1} > Terms & Conditions</Text>
+                  <Text style={{fontWeight:'bold',textDecorationLine:'underline'}}> Terms & Conditions</Text>
+                </Body>
+              </ListItem>
             </View>
 
           </View>
         </View>
 
-        <View style={Footer}>
-          <Button title="CONTINUE" buttonStyle={{
-            marginBottom:0,
-            backgroundColor: '#5FB2AE',
-            width: '100%',
-            height: 58,
-            borderRadius: 5
-          }} />
+        <View style={FooterStyle}>
+          <Button title="CONTINUE" buttonStyle={FooterBtn} onPress = {()=>this.onSignUp()} />
         </View>
       </View>
     );
   }
 }
+
+
+const MapStateToProps = state => {
+  return state
+}
+
+export default connect(MapStateToProps)(SignUp);

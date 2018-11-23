@@ -13,6 +13,7 @@ export const FetchMessage = () => {
           }
           msg = msg.reverse();
           store.dispatch({type:"FETCH_MESSAGE",payload:msg});
+          
         }
 
         
