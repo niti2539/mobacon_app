@@ -5,6 +5,8 @@ import { Button } from 'react-native-elements';
 import { Wrap, FooterStyle,FooterBtn } from '../../asset/StyleSheet/CommonStyle';
 import { connect } from 'react-redux';
 import CodeInput from 'react-native-confirmation-code-input';
+import HeaderCustom from './Components/Header'
+import { Content } from 'native-base';
 
 
 class ConfirmCode extends Component {
@@ -39,48 +41,52 @@ class ConfirmCode extends Component {
   render() {
     return (
       <View style={Wrap}>
-        <View>
-          <Text
-            style={{
-              marginTop:10,
-              fontSize:40,
-              color:'#3B4859'
-            }}
-          > Confirm Code </Text>
-          <View style={{padding:12}}>
-            <Text
-              style={{width:'70%',
-                fontSize:18,
-                marginBottom:20,
-                color:'#8392A7'}}
-            >We sent you a 4 digit code on your mobile phone number so we can verify that is your number.</Text>
+        <HeaderCustom title={this.props.title} menu={false} back={true} />
+        <Content>
 
+          <View>
             <Text
               style={{
                 marginTop:10,
-                fontSize:14,
-                color:'#3B4859',
-                fontWeight:"bold"
+                fontSize:40,
+                color:'#3B4859'
               }}
-            > 4 DIGIT CODE </Text>
+            > Confirm Code </Text>
+            <View style={{padding:12}}>
+              <Text
+                style={{width:'70%',
+                  fontSize:18,
+                  marginBottom:20,
+                  color:'#8392A7'}}
+              >We sent you a 4 digit code on your mobile phone number so we can verify that is your number.</Text>
 
-            <CodeInput
-              ref="codeInputRef1"
-              className={'border-b'}
-              space={20}
-              size={80}
-              codeLength={4}
-              codeInputStyle={{fontSize:30,color:'#79BFBC'}}
-              activeColor='#79BFBC'
-              inactiveColor='#79BFBC'
-              inputPosition='center'
-              /*onFulfill={(code) => code == '1234' ? 
-              ) :}*/
-              onFulfill={(code)=> this.setState({confirmCode:code})}
-            />
+              <Text
+                style={{
+                  marginTop:10,
+                  fontSize:14,
+                  color:'#3B4859',
+                  fontWeight:"bold"
+                }}
+              > 4 DIGIT CODE </Text>
 
+              <CodeInput
+                ref="codeInputRef1"
+                className={'border-b'}
+                space={20}
+                size={80}
+                codeLength={4}
+                codeInputStyle={{fontSize:30,color:'#79BFBC'}}
+                activeColor='#79BFBC'
+                inactiveColor='#79BFBC'
+                inputPosition='center'
+                /*onFulfill={(code) => code == '1234' ? 
+                ) :}*/
+                onFulfill={(code)=> this.setState({confirmCode:code})}
+              />
+
+            </View>
           </View>
-        </View>
+        </Content>
 
         <View style={FooterStyle}>
           <Button title="CONFIRM NUMBER" buttonStyle={FooterBtn} onPress = {()=>this.ConfirmCode()} />

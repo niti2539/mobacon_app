@@ -37,7 +37,7 @@ const Login = ( phoneNumber , password  ) => {
         },
         body:JSON.stringify({
             phoneNumber : phoneNumber,
-            password : password   
+            password : password
         })
     }).then(res => {
         if(!res.ok){

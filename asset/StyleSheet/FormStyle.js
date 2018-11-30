@@ -72,12 +72,14 @@ var FormStyle = Object.freeze({
       color: INPUT_COLOR,
       backgroundColor: INPUT_BG_COLOR,
       fontSize: FONT_SIZE,
-      height: 52,
-      paddingVertical: Platform.OS === "ios" ? 17 : 17,
+      height: 45,
+      width:'97%',
+      paddingVertical: Platform.OS === "ios" ? 0 : 0,
       paddingHorizontal: 20,
       borderRadius: 5,
       borderColor: BORDER_COLOR,
       borderWidth: 1,
+      marginTop:15,
       marginBottom: 5,
       elevation: 1,
       shadowOpacity: 0.25,
@@ -238,6 +240,20 @@ var FormStyle = Object.freeze({
     marginBottom: 10,
     alignSelf: "stretch",
     justifyContent: "center"
-  }
+  },
+  Item: {
+    backgroundColor:'#fff',
+    marginLeft:0,
+    paddingLeft:0,
+    width:'100%',
+    elevation: 1,
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    shadowColor: '#000',
+    borderRadius: 5,
+    marginTop:5,
+    marginBottom:10
+  },
+  Label:{color:'#3B4859',fontSize:14}
 });
 module.exports = FormStyle;

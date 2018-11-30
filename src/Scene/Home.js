@@ -17,7 +17,7 @@ class Home extends Component {
   render() {
     return (
       <Container style={Wrap}>
-        <HeaderCustom title={this.props.title}/>
+        <HeaderCustom title={this.props.title} menu={true} back={false} />
         <Content padder>
           <Card >
             <CardItem button bord style={(this.state.select == 1)?Style.selectFirst:{borderBottomWidth:1,borderColor:'#F2F4F7'}} onPress={()=>{this.setState({select:1,selectName:'SoftBank'})}}>
