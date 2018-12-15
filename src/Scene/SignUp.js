@@ -9,7 +9,6 @@ import { SignUpAction } from '../Controller/AuthUserController';
 import {  ListItem, CheckBox, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux'
 import {Avatar} from 'react-native-elements'
-import ImagePicker from 'react-native-image-picker';
 import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
 import HeaderCustom from './Components/Header'
 
@@ -21,7 +20,7 @@ class SignUp extends Component {
       phone:'',
       password:'',
       avatarSource: null,
-      termCheck:false
+      termCheck:!false
     };
   }
 
@@ -41,16 +40,24 @@ class SignUp extends Component {
     let phone = this.state.phone;
     let password = this.state.password;
     if(this.state.termCheck == true){
-      if(username != '' || phone != '' || password != ''){
-        Actions.confirmCode();
-        // let data = await SignUpAction(phone,password);
+      if(phone != '' || password != ''){
+        let data = await SignUpAction(phone,password);
+        if(data){ 
+          
+          this.setState({username:'',
+          phone: '',
+          password:''});
+          this.termCheck();
+          Actions.confirmCode();
 
-        // console.log(data)
-        /*if(data){
-          this.setState({value:null})
-        }else{
-          this.setState({value:{phone:this.state.phone,password:''}})
-        }*/
+        } else { 
+
+          this.setState({username:this.state.username,
+          phone: this.state.phone,
+          password:''});
+          this.termCheck();
+
+        }
        }
     }
   }
@@ -58,33 +65,13 @@ class SignUp extends Component {
   onAvatarChange(){
     const options = {};
     
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-    
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-    
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-    
-        this.setState({
-          avatarSource: source,
-        });
-      }
-    });
   }
 
   render() {
 
     return (
       <View style={Wrap}>
-        <HeaderCustom title={this.props.title} menu={false} back={true} />
+        <HeaderCustom title={this.props.title} menu={false} back={true} backTo={()=>Actions.login()}/>
         <Content>
 
           <View>
@@ -111,7 +98,7 @@ class SignUp extends Component {
                 /> */}
                 <Label style={FormStyle.Label}>USERNAME</Label>
                 <Item style={FormStyle.Item}>
-                  <Input value={this.state.username} onChangeText={(text)=>this.setState({username:text})} keyboardType='numeric'/>
+                  <Input value={this.state.username} onChangeText={(text)=>this.setState({username:text})} />
                 </Item>
                 <Label style={FormStyle.Label}>PHONE NUMBER</Label>
                 <Item style={FormStyle.Item}>
@@ -152,9 +139,10 @@ class SignUp extends Component {
 }
 
 
-const MapStateToProps = state => {
-  return state
-}
+// const MapStateToProps = state => {
+//   return state
+// }
 
 
-export default connect(MapStateToProps)(SignUp);
+// export default connect(MapStateToProps)(SignUp);
+export default (SignUp);

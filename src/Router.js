@@ -24,18 +24,17 @@ export class Route extends Component {
             <Scene key="root" titleStyle={style.titleStyle} leftButtonIconStyle={style.leftButtonStyle} >
                 <Scene key="drawerMenu" 
                     contentComponent={DrawerMenu}
-                    
                     drawer
                     drawerWidth={300}
                     hideNavBar> 
-                    <Scene key="login" component={Login} title="LOGIN" hideNavBar initial  type={ActionConst.RESET}/>
-                    <Scene key="signUp" component={SignUp} title="SIGNUP" hideNavBar/>
-                    <Scene key="confirmCode" component={ConfirmCode} title="CONFIRM CODE" hideNavBar/>
-                    <Scene key="home" component={Home} title="ANALYZE BILL"  hideNavBar/>
+                    <Scene key="login" component={Login} title="LOGIN" hideNavBar drawerLockMode={'locked-open'} initial/>
+                    <Scene key="signUp" component={SignUp} title="SIGNUP" drawerLockMode={'locked-open'} hideNavBar/>
+                    <Scene key="confirmCode" component={ConfirmCode} title="CONFIRM CODE" drawerLockMode={'locked-open'} hideNavBar/>
+                    <Scene key="home" component={Home} title="ANALYZE BILL"  hideNavBar />
                     <Scene key="LoginCarrier" component={LoginCarrier} title="LOGIN INTO YOUR ACCOUNT" hideNavBar />
                     <Scene key="Analyze" component={AnalyzeDetail} title="AnalyzeDetail"  hideNavBar/>
-                    <Scene key="promotion" component={ShowPromotion} title="Live Chat" hideNavBar/>
-                    <Scene key="Upgrade" component={UpgradeToPro} title="Live Chat" hideNavBar />
+                    <Scene key="promotion" component={ShowPromotion} title="UPGRADE" hideNavBar/>
+                    <Scene key="Upgrade" component={UpgradeToPro} title="UPGRADE" hideNavBar />
                     <Scene key="chat" component={Chat} title="Live Chat" hideNavBar/>
                     <Scene key="ReportHistory" component={ReportHistory} title="ReportHistory"  hideNavBar/>
                     <Scene key="ReportHistoryDetail" component={ReportHistoryDetail} title="ReportHistoryDetail" hideNavBar />

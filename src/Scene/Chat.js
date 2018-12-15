@@ -1,14 +1,10 @@
- import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { connect } from 'react-redux';
-import { FetchMessage, SendMessage } from '../Controller/ChatController';
+ import React, { Component } from 'react'
+import { View } from 'react-native'
+import { GiftedChat } from 'react-native-gifted-chat'
+import { connect } from 'react-redux'
+import { FetchMessage, SendMessage } from '../Controller/ChatController'
 import HeaderCustom from './Components/Header'
+import {Actions} from 'react-native-router-flux'
 
  
 class Chat extends Component {
@@ -17,6 +13,10 @@ class Chat extends Component {
   }
 
   componentWillMount() {
+    
+    let id = this.props.AuthUserReducer.info.plan.id; 
+    let planPro = (id == 2) ? true : false;
+    if(!planPro) Actions.promotion();
     FetchMessage();
   }
   
@@ -24,7 +24,7 @@ class Chat extends Component {
   render() {
     return (
       <View>
-        <HeaderCustom title={this.props.title} menu={false} back={true} />
+        <HeaderCustom title={this.props.title} backTo={()=>Actions.home()} back={true} />
         <GiftedChat
           messages={ this.props.ChatReducer.messages }
           onSend={messages => SendMessage({messages:messages})}

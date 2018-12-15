@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import CardDetail from './Components/CardDetail'
 import HeaderCustom from './Components/Header'
 import { Wrap, FooterStyle, FooterBtn } from '../../asset/StyleSheet/CommonStyle'
+import { Actions } from 'react-native-router-flux'
 
 export default class ReportHistoryDetail extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class ReportHistoryDetail extends Component {
   }
     return (
       <View style={Wrap}>
-        <HeaderCustom title={this.props.title} menu={false} back={true}/>
+        <HeaderCustom title={this.props.title} backTo={()=>Actions.ReportHistory()} back={true}/>
         <CardDetail footer={false} data={data}/>
 
       </View>

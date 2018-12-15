@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { YellowBox, BackHandler, DeviceEventEmitter, Alert } from 'react-native';
+import { YellowBox, BackHandler, DeviceEventEmitter, Alert, AsyncStorage } from 'react-native';
 import store from './src/Store/index';
 import Route from './src/Router'
 import InitialApp from './src/Controller/InitialController';
 import { Actions } from 'react-native-router-flux'
-
+import {isSignedIn} from './src/Controller/AuthUserController'
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader','Setting a timer']);
+
+
 
 export default class App extends Component {
 
@@ -15,7 +17,14 @@ export default class App extends Component {
     DeviceEventEmitter.addListener('hardwareBackPress', () => {
 
       try {
-        Actions.pop();
+        isSignedIn().then(res => {
+          if(res){
+            Actions.home();
+          }else{
+            Actions.login();
+          }
+        })
+        
         return true;
       }
       catch (err) {
@@ -25,6 +34,15 @@ export default class App extends Component {
     })
 
     new InitialApp();
+  }
+
+  checkLogin() {
+    AsyncStorage.getItem('token').then(value => {
+      if(value === null){
+        return false
+      }
+      return true
+    })
   }
 
   render() {

@@ -7,33 +7,30 @@ import { connect } from 'react-redux';
 import CodeInput from 'react-native-confirmation-code-input';
 import HeaderCustom from './Components/Header'
 import { Content } from 'native-base';
-
+import { CheckOTP } from '../Controller/AuthUserController';
 
 class ConfirmCode extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: null,
-      termCheck:false
+      confirmCode: ''
     };
   }
 
   async ConfirmCode(){
-    if(this.state.confirmCode == '1234'){
-      Alert.alert(
-        'Confirmation Code',
-        'Successful!',
-        [{text: 'OK'}],
-        { cancelable: false })
-
+    let res = await CheckOTP(this.props.AuthUserReducer.phone,this.state.confirmCode);
+    if(res){
+      // Alert.alert(
+      //   'Confirmation Code',
+      //   'Successful!',
+      //   [{text: 'OK'}],
+      //   { cancelable: false })
       Actions.login();
-
-
     }else{
       Alert.alert(
         'Confirmation Code',
         'Code not match!',
-        [{text: 'OK'}],
+        [{text: 'Not Match'}],
         { cancelable: false })
     }
   } 
@@ -41,7 +38,7 @@ class ConfirmCode extends Component {
   render() {
     return (
       <View style={Wrap}>
-        <HeaderCustom title={this.props.title} menu={false} back={true} />
+        <HeaderCustom title={this.props.title} backTo={()=>Actions.signUp()} back={true} />
         <Content>
 
           <View>
@@ -51,7 +48,7 @@ class ConfirmCode extends Component {
                 fontSize:40,
                 color:'#3B4859'
               }}
-            > Confirm Code </Text>
+            > Confirm Code {this.props.AuthUserReducer.phone} </Text>
             <View style={{padding:12}}>
               <Text
                 style={{width:'70%',
@@ -79,8 +76,6 @@ class ConfirmCode extends Component {
                 activeColor='#79BFBC'
                 inactiveColor='#79BFBC'
                 inputPosition='center'
-                /*onFulfill={(code) => code == '1234' ? 
-                ) :}*/
                 onFulfill={(code)=> this.setState({confirmCode:code})}
               />
 

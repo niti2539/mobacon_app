@@ -14,8 +14,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone: '0846915660',
-      password: 'wiwiwi',
+      phone: '0902595194',
+      password: 'Test',
       modalVisible: false
     };
   }
@@ -25,10 +25,12 @@ class Login extends Component {
       this.setState({phone:'',password:''})
       let data = await LoginAction(this.state.phone,this.state.password)
       // console.log(data)
-      if(data){
+      if(!data){
+        this.setState({phone:this.state.phone,password:''})
       }else{
-        // this.setState({phone:this.state.phone,password:''})
+        Actions.home();
       }
+
     }else{
         this.setState({phone:this.state.phone,password:''})
     }
@@ -103,14 +105,15 @@ class Login extends Component {
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+            
+            // Alert.alert('Modal has been closed.');
           }}>
-            <View style={Object.assign({},Wrap,{backgroundColor:"#F9FAFC"})}>
+            <View style={Object.assign({},Wrap,{backgroundColor:"#F9FAFC",padding:12})}>
               <Text style={{
                 marginTop:10,
                 fontSize:40,
                 color:'#3B4859'
-              }}>FORGET</Text>
+              }}>FORGET PASSWORD</Text>
               <View style={{flex:1,padding:12}}>
                 <Text
                   style={{width:'70%',

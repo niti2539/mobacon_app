@@ -4,11 +4,13 @@ import { combineReducers } from 'redux';
 import ChatReducer from './ChatReducer';
 import InitialReducer from './InitialReducer';
 import AuthUserReducer from './AuthUserReducer';
+import Global from './Global'
 
  const rootReducer = combineReducers({
     ChatReducer,
     InitialReducer,
-    AuthUserReducer
+    AuthUserReducer,
+    Global
  })
 
  

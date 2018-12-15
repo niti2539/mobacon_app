@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements'
 import { BarChart, Grid, YAxis, XAxis } from 'react-native-svg-charts'
 import { LinearGradient, Stop, Defs } from 'react-native-svg'
 import {View} from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 export default class CardReport extends Component {
   constructor(props) {
@@ -27,11 +28,17 @@ export default class CardReport extends Component {
     const data = [ 
         {
             name:'MAY',
-            value:550
+            value:550,
+            svg:{
+                onPress: ()=> Actions.ReportHistoryDetail()
+            }
         },
         {   
             name:'JUNE',
-            value:390
+            value:390,
+            svg:{
+                onPress: ()=> Actions.ReportHistoryDetail()
+            }
         } 
     ]
     const contentInset = { top: 10, bottom: 10 }

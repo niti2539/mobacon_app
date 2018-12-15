@@ -3,12 +3,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Wrap, FooterStyle, FooterBtn } from '../../asset/StyleSheet/CommonStyle'
 import FormStyle from '../../asset/StyleSheet/FormStyle'
-
+import {Actions} from 'react-native-router-flux'
 import HeaderCustom from './Components/Header'
 import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
 
@@ -28,7 +27,7 @@ class UpgradeToPro extends Component {
   render() {
     return (
       <View style={Wrap}>
-        <HeaderCustom title={this.props.title} menu={false} back={true}/>
+        <HeaderCustom title={this.props.title} backTo={()=>Actions.promotion()} back={true}/>
         
         
         <Content style={{paddingTop:30,paddingHorizontal:15}}>

@@ -6,6 +6,7 @@ import { Container, Content, Text, Footer, Card, CardItem, Body, View } from 'na
 import { Button } from 'react-native-elements'
 import { StyleSheet, Image } from 'react-native' 
 import { connect } from 'react-redux'
+import store from '../Store/index'
 
 class Home extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Home extends Component {
   render() {
     return (
       <Container style={Wrap}>
-        <HeaderCustom title={this.props.title} menu={true} back={false} />
+        <HeaderCustom title={this.props.title} menu />
         <Content padder>
           <Card >
             <CardItem button bord style={(this.state.select == 1)?Style.selectFirst:{borderBottomWidth:1,borderColor:'#F2F4F7'}} onPress={()=>{this.setState({select:1,selectName:'SoftBank'})}}>
@@ -48,7 +49,7 @@ class Home extends Component {
           </Card>
         </Content>
         <View style={FooterStyle}>
-          <Button title="START ANALYZE" buttonStyle={FooterBtn} onPress={()=>Actions.LoginCarrier({company:this.state.selectName})} />
+          <Button title="PRO TO CARRIER" buttonStyle={FooterBtn} onPress={()=>{store.dispatch({type:'CARRIER',payload:this.state.selectName});Actions.LoginCarrier();}} disabled={(this.state.select == 0) ? true : false}/>
         </View>
       </Container>
     )
