@@ -19,8 +19,8 @@ export const LoginAction = async (phoneNumber,password) => {
     return false;
 }
 
-export const SignUpAction = async (phoneNumber,password) => {
-    let res = await AuthUserModel.SignUp(phoneNumber,password);
+export const SignUpAction = async (userName,phoneNumber,password) => {
+    let res = await AuthUserModel.SignUp(userName,phoneNumber,password);
     if(res.status){
         if(SendOTP(phoneNumber)){
             store.dispatch({type:'SET_PHONE_NUMBER',payload:phoneNumber});
@@ -31,10 +31,9 @@ export const SignUpAction = async (phoneNumber,password) => {
     return false;
 }
 
-const SendOTP = async (phoneNumber) => {
+export const SendOTP = async (phoneNumber) => {
     let res = await AuthUserModel.SendOTP(phoneNumber);
-    if(res.status) return true;
-    return false
+    return res.status
 }
 
 export const CheckOTP = async (phoneNumber,otp) => {
@@ -43,7 +42,7 @@ export const CheckOTP = async (phoneNumber,otp) => {
     return res.status;
 }
 
-export const Logout = async () => {
+export const LogoutAction = async () => {
     let state = store.getState();
     let res = await AuthUserModel.Logout(state.AuthUserReducer.token);
     // console.log(res.status);
@@ -58,6 +57,11 @@ export const Logout = async () => {
         }});
     }
 
+    return res.status;
+}
+
+export const ForgetPasswordAction = async (phoneNumber) => {
+    let res = await AuthUserModel.ForgetPassword(phoneNumber);
     return res.status;
 }
 
@@ -80,4 +84,4 @@ export const isSignedIn = () => {
         })
         .catch(err => reject(err));*/
     });
-  };
+};

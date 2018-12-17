@@ -5,5 +5,6 @@ export default API_URL = {
     Verification : Host + '/mobacon/api/mobile/user/verification', //Sent otp to mobile
     Login : Host + '/mobacon/api/mobile/login',
     Logout : Host + '/mobacon/api/mobile/logout',
+    ForgetPassword : Host + '/mobacon/api/mobile/changePassword',
 }
 

@@ -1,6 +1,6 @@
 import API_URL from '../ApiProvider'
 
-const SignUp = ( phoneNumber, password ) => {
+const SignUp = ( userName, phoneNumber, password ) => {
     return fetch(API_URL.SignUp,{
         method:'POST',
         headers:{
@@ -8,6 +8,7 @@ const SignUp = ( phoneNumber, password ) => {
             'Content-Type': 'application/json',
         },
         body:JSON.stringify({
+            fullName : userName,
             phoneNumber : phoneNumber,
             password : password   
         })
@@ -79,7 +80,23 @@ const Logout = (token) => {
           "authorization": "Bearer " + token,
         }
       };
-    return fetch(API_URL.Logout,options).then(res => { console.log(res); return (!res.ok) ? { status : false } : {status: true } }).catch(err => {
+    return fetch(API_URL.Logout,options).then(res => { return (!res.ok) ? { status : false } : {status: true } }).catch(err => {
+        console.error(err)
+    });
+}
+
+const ForgetPassword = (phoneNumber) => {
+    let options = {
+        method:'POST',
+        headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+            phoneNumber : phoneNumber,
+        })
+    };
+    return fetch(API_URL.ForgetPassword,options).then(res => { return (!res.ok) ? { status : false } : {status: true } }).catch(err => {
         console.error(err)
     });
 }
@@ -90,4 +107,5 @@ export default AuthUserModel = {
     SignUp : SignUp,
     CheckOTP : CheckOTP,
     SendOTP : SendOTP,
+    ForgetPassword : ForgetPassword,
 }

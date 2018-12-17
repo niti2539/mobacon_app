@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
-import { Actions, ActionConst } from 'react-native-router-flux';
-// import t from 'tcomb-form-native';
+import { Actions } from 'react-native-router-flux';
 import FormStyle from '../../asset/StyleSheet/FormStyle';
 import { Wrap, FooterStyle, FooterBtn } from '../../asset/StyleSheet/CommonStyle';
 import { connect } from 'react-redux';
 import { LoginAction } from '../Controller/AuthUserController';
-import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
+import { Content, Form, Item, Input, Label } from 'native-base';
 import HeaderCustom from './Components/Header'
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone: '0902595194',
-      password: 'Test',
-      modalVisible: false
+      phone: '',
+      password: '',
     };
   }
 
@@ -24,7 +22,6 @@ class Login extends Component {
     if(this.state.phone != '' ||this.state.password != '') {
       this.setState({phone:'',password:''})
       let data = await LoginAction(this.state.phone,this.state.password)
-      // console.log(data)
       if(!data){
         this.setState({phone:this.state.phone,password:''})
       }else{
@@ -73,7 +70,7 @@ class Login extends Component {
                 <TouchableOpacity 
                   style={{alignSelf:'flex-end'}} 
                   onPress={() => {
-                    this.setState({modalVisible:!this.state.modalVisible});
+                    Actions.forgetPassword();
                   }}>
                     <Text style={{color:'#79BFBC',fontWeight:'bold'}}>Forget Password</Text>
                 </TouchableOpacity>
@@ -100,39 +97,6 @@ class Login extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <Modal
-          animationType="fade"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            
-            // Alert.alert('Modal has been closed.');
-          }}>
-            <View style={Object.assign({},Wrap,{backgroundColor:"#F9FAFC",padding:12})}>
-              <Text style={{
-                marginTop:10,
-                fontSize:40,
-                color:'#3B4859'
-              }}>FORGET PASSWORD</Text>
-              <View style={{flex:1,padding:12}}>
-                <Text
-                  style={{width:'70%',
-                    fontSize:18,
-                    marginBottom:20,
-                    color:'#8392A7'}}
-                  >Login with your phone number and get ready to pay less and have better mobile subscriptions.</Text>
-                <Form>
-                  <Label style={FormStyle.Label}>PHONE NUMBER</Label>
-                  <Item style={FormStyle.Item}>
-                    <Input value={this.state.phone} onChangeText={(text)=>this.setState({phone:text})} keyboardType='numeric'/>
-                  </Item>
-                </Form>
-              </View>
-              <View style={FooterStyle}>
-                <Button title="SEND" buttonStyle={FooterBtn} onPress = {()=>this.setState({modalVisible:!this.state.modalVisible})} />
-              </View>
-            </View>
-        </Modal>
 
       </View>
     );

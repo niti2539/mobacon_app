@@ -35,6 +35,7 @@ export default class AnalyzeDetail extends Component {
   }
     return (
       <View style={Wrap}>
+      
         <Header title={this.props.title} menu/>
         <CardDetail footer={true} data={data}/>
 

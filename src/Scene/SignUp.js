@@ -20,7 +20,7 @@ class SignUp extends Component {
       phone:'',
       password:'',
       avatarSource: null,
-      termCheck:!false
+      termCheck:false
     };
   }
 
@@ -40,8 +40,8 @@ class SignUp extends Component {
     let phone = this.state.phone;
     let password = this.state.password;
     if(this.state.termCheck == true){
-      if(phone != '' || password != ''){
-        let data = await SignUpAction(phone,password);
+      if(username != '' || phone != '' || password != ''){
+        let data = await SignUpAction(username,phone,password);
         if(data){ 
           
           this.setState({username:'',
@@ -108,13 +108,13 @@ class SignUp extends Component {
                 <Item style={FormStyle.Item}>
                   <Input value={this.state.password} onChangeText={(text)=>this.setState({password:text})} secureTextEntry/>
                 </Item>
-                <TouchableOpacity 
+                {/* <TouchableOpacity 
                   style={{alignSelf:'flex-end'}} 
                   onPress={() => {
                     this.setState({modalVisible:!this.state.modalVisible});
                   }}>
                     <Text style={{color:'#79BFBC',fontWeight:'bold'}}>Forget Password</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </Form>
               <View >
                 <ListItem style={{borderBottomWidth:0,marginLeft:0}}>

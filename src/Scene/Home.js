@@ -49,7 +49,7 @@ class Home extends Component {
           </Card>
         </Content>
         <View style={FooterStyle}>
-          <Button title="PRO TO CARRIER" buttonStyle={FooterBtn} onPress={()=>{store.dispatch({type:'CARRIER',payload:this.state.selectName});Actions.LoginCarrier();}} disabled={(this.state.select == 0) ? true : false}/>
+          <Button title="LOGIN TO CARRIER" buttonStyle={FooterBtn} onPress={()=>{store.dispatch({type:'CARRIER',payload:this.state.selectName});Actions.LoginCarrier();}} disabled={(this.state.select == 0) ? true : false}/>
         </View>
       </Container>
     )

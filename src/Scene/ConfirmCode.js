@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
 import { Wrap, FooterStyle,FooterBtn } from '../../asset/StyleSheet/CommonStyle';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import CodeInput from 'react-native-confirmation-code-input';
 import HeaderCustom from './Components/Header'
 import { Content } from 'native-base';
-import { CheckOTP } from '../Controller/AuthUserController';
+import { SendOTP, CheckOTP } from '../Controller/AuthUserController';
 
 class ConfirmCode extends Component {
   constructor(props) {
@@ -33,7 +33,24 @@ class ConfirmCode extends Component {
         [{text: 'Not Match'}],
         { cancelable: false })
     }
-  } 
+  }
+
+  async Resend(){
+    let res = await SendOTP(this.props.AuthUserReducer.phone);
+    if(res){
+      Alert.alert(
+        'Send Code',
+        'Successful!',
+        [{text: 'OK'}],
+        { cancelable: false })
+    }else{
+      Alert.alert(
+        'Send Code',
+        'Code failed',
+        [{text: 'Not Match'}],
+        { cancelable: false })
+    }
+  }
 
   render() {
     return (
@@ -48,7 +65,7 @@ class ConfirmCode extends Component {
                 fontSize:40,
                 color:'#3B4859'
               }}
-            > Confirm Code {this.props.AuthUserReducer.phone} </Text>
+            > Confirm Code </Text>
             <View style={{padding:12}}>
               <Text
                 style={{width:'70%',
@@ -78,7 +95,13 @@ class ConfirmCode extends Component {
                 inputPosition='center'
                 onFulfill={(code)=> this.setState({confirmCode:code})}
               />
-
+              
+                
+              <TouchableOpacity onPress={()=>this.Resend()} style={{marginTop:10,alignSelf:'center'}}>
+                <Text>
+                  resend
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Content>
