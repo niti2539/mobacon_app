@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
+  Platform
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -11,6 +12,18 @@ import {Actions} from 'react-native-router-flux'
 import HeaderCustom from './Components/Header'
 import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
 
+import * as RNIap from 'react-native-iap';
+
+const itemSkus = Platform.select({
+  ios: [
+    'com.buzzfreeze.app.mobacon'
+  ],
+  android: [
+    'com.buzzfreeze.app.mobacon'
+  ]
+});
+
+
 class UpgradeToPro extends Component {
   constructor(props) {
       super(props);
@@ -18,11 +31,43 @@ class UpgradeToPro extends Component {
         selected2:undefined
       };
   }
+
+  async componentDidMount() {
+    try {
+      const products = await RNIap.getProducts(itemSkus);
+      this.setState({ products });
+    } catch(err) {
+      console.warn(err); // standardized err.code and err.message available
+    }
+  }
+
+  componentWillUnmount() {
+    RNIap.endConnection();
+  }
+
+  onBuyPurchase(){
+    
+    this.setState({ progressTitle: 'Please wait...' });
+    RNIap.buyProduct( 'com.buzzfreeze.app.mobacon' ).then(purchase => {
+        // this.setState({
+        //   receipt: purchase.transactionReceipt, // save the receipt if you need it, whether locally, or to your server.
+        //   progressTitle: 'Purchase Successful!',
+        // });
+        // Actions.chat()
+      }).catch(err => {
+        // resetting UI
+        console.warn(err); // standardized err.code and err.message available
+        alert(err.message);
+      })
+  }
+
   onValueChange2(value) {
     this.setState({
       selected2: value
     });
   }
+
+  
 
   render() {
     return (
@@ -88,7 +133,7 @@ class UpgradeToPro extends Component {
 
         <View style={FooterStyle}>
           <Button title='UPGRADE TO PRO' buttonStyle={FooterBtn}
-            onPress={()=>Actions.chat()} />
+            onPress={()=> this.onBuyPurchase()} />
         </View>
       </View>
 
