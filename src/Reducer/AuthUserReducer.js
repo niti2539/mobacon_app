@@ -12,6 +12,9 @@ export default function AuthUserReducer(state = init, action) {
       case 'SET_PHONE_NUMBER' :
         state.phone =  action.payload;
         return state;
+      case 'PATCH_INFO' :
+        state.info = {...state.info , ...action.payload.info};
+        return state;
       default:
         return state
     }

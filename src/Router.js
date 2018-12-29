@@ -13,6 +13,7 @@ import UpgradeToPro from './Scene/UpgradeToPro'
 import AnalyzeDetail from './Scene/AnalyzeDetail'
 import ReportHistory from './Scene/ReportHistory'
 import ReportHistoryDetail from './Scene/ReportHistoryDetail'
+import Setting from './Scene/Setting'
 
   
 export class Route extends Component {
@@ -32,9 +33,10 @@ export class Route extends Component {
                     <Scene key="forgetPassword" component={ForgetPassword} title="FORGET PASSWORD" hideNavBar drawerLockMode={'locked-open'}/>
                     <Scene key="signUp" component={SignUp} title="SIGNUP" drawerLockMode={'locked-open'} hideNavBar/>
                     <Scene key="confirmCode" component={ConfirmCode} title="CONFIRM CODE" drawerLockMode={'locked-open'} hideNavBar />
-                    <Scene key="home" component={Home} title="ANALYZE BILL"  hideNavBar />
+                    <Scene key="home" component={Home} title="ANALYZE BILL" hideNavBar />
+                    <Scene key="Setting" component={Setting} title="SETTING" hideNavBar />
                     <Scene key="LoginCarrier" component={LoginCarrier} title="LOGIN INTO YOUR ACCOUNT" hideNavBar />
-                    <Scene key="Analyze" component={AnalyzeDetail} title="Analyze Detail"  hideNavBar/>
+                    <Scene key="Analyze" component={AnalyzeDetail} title="Analyze Detail"  hideNavBar />
                     <Scene key="promotion" component={ShowPromotion} title="UPGRADE" hideNavBar/>
                     <Scene key="Upgrade" component={UpgradeToPro} title="UPGRADE" hideNavBar />
                     <Scene key="chat" component={Chat} title="Live Chat" hideNavBar/>

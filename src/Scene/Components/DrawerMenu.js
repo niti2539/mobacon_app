@@ -69,16 +69,16 @@ export default class DrawerMenu extends Component {
                         <Text style={style.text}>REPORT HISTORY </Text>
                         <Text style={style.textHighlight}>(PRO)</Text>
                     </ListItem>
-                    <ListItem
+                    {/* <ListItem
                         style={style.ListItem}
                         button
-                        /*onPress={() => Actions.ReportHistory()}*/>
+                        onPress={() => Actions.ReportHistory()}>
                         <Text style={style.text}>PLAN SELECTION</Text>
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem
                         style={style.ListItem}
                         button
-                        /*onPress={() => Actions.ReportHistory()}*/>
+                        onPress={() => Actions.Setting()}>
                         <Text style={style.text}>SETTINGS</Text>
                     </ListItem>
                     <ListItem

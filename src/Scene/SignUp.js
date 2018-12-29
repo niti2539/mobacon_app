@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text,TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
-// import t from 'tcomb-form-native';
 import FormStyle from '../../asset/StyleSheet/FormStyle';
 import { Wrap, FooterStyle,FooterBtn } from '../../asset/StyleSheet/CommonStyle';
 import { connect } from 'react-redux';
 import { SignUpAction } from '../Controller/AuthUserController';
 import {  ListItem, CheckBox, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux'
-import {Avatar} from 'react-native-elements'
 import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
 import HeaderCustom from './Components/Header'
 

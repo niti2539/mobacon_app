@@ -6,5 +6,8 @@ export default API_URL = {
     Login : Host + '/mobacon/api/mobile/login',
     Logout : Host + '/mobacon/api/mobile/logout',
     ForgetPassword : Host + '/mobacon/api/mobile/changePassword',
+    EditProfile : Host + '/mobacon/api/mobile/user',
+    ChangePassword : Host + '/mobacon/api/mobile/user/password',
+    GetReview : Host + '/mobacon/api/mobile/request/review',
+    GetHistory : Host + '/mobacon/api/mobile/report/history',
 }
-

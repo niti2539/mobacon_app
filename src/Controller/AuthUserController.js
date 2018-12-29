@@ -19,6 +19,25 @@ export const LoginAction = async (phoneNumber,password) => {
     return false;
 }
 
+export const EditProfileAction = async (formData) => {
+    let state = store.getState();
+    let token = state.AuthUserReducer.token;
+    let data = await AuthUserModel.EditProfile(token,formData);
+    if(data.status){
+        data = data.data;
+        store.dispatch({type:'PATCH_INFO',payload:data});
+        return true;
+    }
+    return false;
+}
+
+export const ChangePasswordAction = async (oldPassword , newPassword) => {
+    let state = store.getState();
+    let token = state.AuthUserReducer.token;
+    let res = await AuthUserModel.ChangePassword(token,oldPassword,newPassword);
+    return res.status
+}
+
 export const SignUpAction = async (userName,phoneNumber,password) => {
     let res = await AuthUserModel.SignUp(userName,phoneNumber,password);
     if(res.status){

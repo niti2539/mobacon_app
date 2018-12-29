@@ -26,6 +26,7 @@ class Login extends Component {
         this.setState({phone:this.state.phone,password:''})
       }else{
         Actions.home();
+        // Actions.Analyze();
       }
 
     }else{

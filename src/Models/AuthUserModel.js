@@ -77,10 +77,42 @@ const Logout = (token) => {
     let options = {
         "method": "POST",
         "headers": {
-          "authorization": "Bearer " + token,
+            "authorization": "Bearer " + token,
         }
-      };
+    };
     return fetch(API_URL.Logout,options).then(res => { return (!res.ok) ? { status : false } : {status: true } }).catch(err => {
+        console.error(err)
+    });
+}
+
+const EditProfile = ( token , formData ) => {
+    return fetch(API_URL.EditProfile,{
+        method:'PATCH',
+        headers:{
+            "authorization": "Bearer " + token,
+        },
+        body: formData
+    }).then(res => { return (!res.ok) ? { status : false } : res.json() }).then(resJson => {
+        if(resJson.status == false) return { status : false };
+        return {status: true , data : resJson};
+    }).catch(err => {
+        console.error(err)
+    });
+}
+
+const ChangePassword = ( token , oldPassword , newPassword ) => {
+    return fetch(API_URL.ChangePassword,{
+        method:'PATCH',
+        headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            "authorization": "Bearer " + token,
+        },
+        body: JSON.stringify({
+            oldPassword: oldPassword,
+            newPassword: newPassword            
+        })
+    }).then(res => { return (!res.ok) ? { status : false } : { status : true } }).catch(err => {
         console.error(err)
     });
 }
@@ -108,4 +140,6 @@ export default AuthUserModel = {
     CheckOTP : CheckOTP,
     SendOTP : SendOTP,
     ForgetPassword : ForgetPassword,
+    EditProfile : EditProfile,
+    ChangePassword: ChangePassword,
 }
