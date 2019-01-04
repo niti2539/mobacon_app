@@ -55,12 +55,13 @@ const CheckOTP = ( phoneNumber , OTP ) => {
 }
 
 const Login = ( phoneNumber , password  ) => {
-    return fetch(API_URL.Login,{
+    return fetch(API_URL.Login, {
         method:'POST',
         headers:{
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
+        mode: 'no-cors',
         body:JSON.stringify({
             phoneNumber : phoneNumber,
             password : password
