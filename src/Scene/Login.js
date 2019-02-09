@@ -8,14 +8,34 @@ import { connect } from 'react-redux';
 import { LoginAction } from '../Controller/AuthUserController';
 import { Content, Form, Item, Input, Label } from 'native-base';
 import HeaderCustom from './Components/Header'
+import {isSignedIn} from '../Controller/AuthUserController'
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone: '',
-      password: '',
+      phone: '0800000001',
+      password: 'wiwiwi',
     };
+  }
+
+  
+  componentDidMount(){
+    try {
+      isSignedIn().then(res => {
+        if(res){
+          Actions.home();
+        }
+      })
+      
+      return true;
+    }
+    catch (err) {
+      BackHandler.exitApp()
+      return false;
+    }
+
+    
   }
 
   async onLogin(){
@@ -36,8 +56,6 @@ class Login extends Component {
 
   render() {
     return (
-
-
       <View style={Wrap}>
         <HeaderCustom title={this.props.title} />
         <Content>

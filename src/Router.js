@@ -17,9 +17,6 @@ import Setting from './Scene/Setting'
 
   
 export class Route extends Component {
-    componentDidMount() {
-        
-    }
   render() {
     return (
         <Router navigationBarStyle={{backgroundColor:'#79BFBC'}}>

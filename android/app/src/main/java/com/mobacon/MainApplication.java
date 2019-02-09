@@ -3,6 +3,7 @@ package com.mobacon;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.wix.reactnativenotifications.RNNotificationsPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.horcrux.svg.SvgPackage;
@@ -12,6 +13,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.wix.reactnativenotifications.RNNotificationsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +34,9 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new SvgPackage(),
             new VectorIconsPackage(),
-            new LinearGradientPackage()
+            new LinearGradientPackage(),
+            new RNNotificationsPackage(MainApplication.this)
+
       );
     }
 

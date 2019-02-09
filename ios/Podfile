@@ -8,5 +8,7 @@ target 'Mobacon' do
   # Pods for Mobacon
 
 
+  pod 'react-native-notifications', :path => '../node_modules/react-native-notifications'
+
 end
 

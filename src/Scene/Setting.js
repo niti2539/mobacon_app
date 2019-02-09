@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-picker';
 import {Avatar} from 'react-native-elements'
 import { Content, Form, Item, Input, Label, Text, Picker,Icon } from 'native-base';
 import { EditProfileAction , ChangePasswordAction } from '../Controller/AuthUserController';
-
+import API_URL from '../ApiProvider'
  
 // More info on all the options is below in the API Reference... just some common use cases shown here
 const options = {
@@ -25,7 +25,7 @@ class Setting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatarSource: { uri: 'http://mobacon-api.pieros.site' + this.props.AuthUserReducer.info.imagePath } ,
+      avatarSource: { uri: API_URL.Host + this.props.AuthUserReducer.info.imagePath } ,
       username: this.props.AuthUserReducer.info.fullName ,
       oldPassword: '' ,
       newPassword: '' ,

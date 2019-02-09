@@ -6,7 +6,7 @@ import { Container, Content, Text, Footer, Card, CardItem, Body, View } from 'na
 import { Button } from 'react-native-elements'
 import { StyleSheet, Image } from 'react-native' 
 import { connect } from 'react-redux'
-import store from '../Store/index'
+import { store } from '../Store/index'
 
 class Home extends Component {
   constructor(props) {

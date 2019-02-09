@@ -12,9 +12,12 @@ export default class CardReport extends Component {
     this.state = {
         minutesClick:true,
         smsClick:false,
-        dataClick:false
+        dataClick:false,
+        data: this.props.data
     };
   }
+
+
   onChangeChart(m,s,d) {
     this.setState({
         minutesClick: m,
@@ -22,6 +25,8 @@ export default class CardReport extends Component {
         dataClick: d
     })
   }
+
+
   render() {
 
     const fill = 'rgb(134, 65, 244)'
@@ -42,7 +47,7 @@ export default class CardReport extends Component {
         } 
     ]
     const contentInset = { top: 10, bottom: 10 }
-    const yMax = 600
+    const yMax = 10000
     const yMin = 0
     const Gradient = () => (
         <Defs key={ 'gradient' }>
@@ -57,7 +62,7 @@ export default class CardReport extends Component {
             <Card style={{borderRadius:5}}>
                 <CardItem header bordered padder style={{backgroundColor:'#A0ACBC',flexWrap:'wrap',flexDirection:'column'}}>
                     <Text style={{alignSelf:'center',fontSize:19,textAlign:'center',color:'#fff'}}>REPORT HISTORY FOR{'\n'}</Text>
-                    <Text style={{alignSelf:'center',fontSize:19,textAlign:'center',color:'#fff',marginBottom:10}}>LAST 2 MONTHS{'\n'}</Text>
+                    {/* <Text style={{alignSelf:'center',fontSize:19,textAlign:'center',color:'#fff',marginBottom:10}}>LAST {this.props.data.length} MONTHS{'\n'}</Text> */}
                     <Body style={{alignSelf:'center',flexDirection:'row'}}>
                         <Button
                             title='MINUTES' 
@@ -86,6 +91,8 @@ export default class CardReport extends Component {
 
                     </Body>
                 </CardItem>
+            </Card>
+
                 <View style={{ height: 400, flexDirection: 'row', padding: 15 }}>
 
                    <YAxis
@@ -96,7 +103,8 @@ export default class CardReport extends Component {
                     />
                     <BarChart
                         style={{ flex: 1}}
-                        data={ data }
+                        data={ this.state.data }
+                        // data={ data }
                         svg={{ fill }}
                         contentInset={ contentInset }
                         yAccessor={ ({ item }) => item.value }
@@ -114,13 +122,13 @@ export default class CardReport extends Component {
                     </BarChart>
                     <XAxis
                         style={{ marginHorizontal: -10 }}
-                        data={ data }
+                        data={ this.state.data }
+                        // data={ data }
                         formatLabel={ (item) => item.name }
                         contentInset={{ left: 10, right: 10 }}
                         svg={{ fontSize: 10, fill: 'black' }}
                     />
                 </View>
-            </Card>
         </Content>
     );
   }

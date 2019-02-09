@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import { Content, Card, CardItem, Text, Body, Item, Textarea, Form, Label } from 'native-base';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FormStyle from '../../../asset/StyleSheet/FormStyle';
-import store from '../../Store/index'
+import { store } from '../../Store/index'
 
 
 export default class CardDetail extends Component {
@@ -58,7 +58,7 @@ export default class CardDetail extends Component {
                     })
                 }
                 
-                <CardItem bordered style={{display:(this.props.footer ? 'flex' : 'none')}}>
+                {/* <CardItem bordered style={{display:(this.props.footer ? 'flex' : 'none')}}>
                     <Form>
                         <Label style={FormStyle.Label}>Review</Label>
                         <Item style={{...FormStyle.Item,...{elevation: 0,shadowOpacity: 0,shadowColor: '#fff'}}}>
@@ -69,7 +69,7 @@ export default class CardDetail extends Component {
                             <Textarea rowSpan={3} style={{width:'100%'}} bordered value={this.state.suggestion  } onChangeText={text => this.onSuggestionChange(text)} />
                         </Item>
                     </Form>
-                </CardItem>
+                </CardItem> */}
 
                 <CardItem footer bordered style={{display:(this.props.footer ? 'flex' : 'none')}}>
                     <TouchableOpacity onPress={()=>this.onLikeToggle()} style={{justifyContent:'space-between',width:'50%',backgroundColor:(this.state.like) ? '#76D5CE' : '#fff'}}>

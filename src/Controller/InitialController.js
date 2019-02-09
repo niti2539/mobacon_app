@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import firebase from '../firebase';
-import store from '../Store/index';
+import { store } from '../Store/index';
 
 export default class InitialApp {
     constructor(){
@@ -15,6 +15,7 @@ export default class InitialApp {
                 store.dispatch({type:"INITIAL_USER_TOKEN",payload:value});
             }
         });
+
     }
     
 

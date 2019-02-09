@@ -23,7 +23,7 @@ class ForgetPassword extends Component {
 
 
       <View style={Wrap}>
-        <HeaderCustom title={this.props.title} />
+        <HeaderCustom title={this.props.title} back backTo={()=>Actions.login()}/>
         <Content>
 
           <View>
