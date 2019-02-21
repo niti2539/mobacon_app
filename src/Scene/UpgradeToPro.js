@@ -11,6 +11,7 @@ import FormStyle from '../../asset/StyleSheet/FormStyle'
 import {Actions} from 'react-native-router-flux'
 import HeaderCustom from './Components/Header'
 import { Content, Form, Item, Input, Label, Picker,Icon } from 'native-base';
+import { Dropdown } from 'react-native-material-dropdown';
 
 import * as RNIap from 'react-native-iap';
 
@@ -70,6 +71,41 @@ class UpgradeToPro extends Component {
   
 
   render() {
+
+    const NumberFam = [{
+      value: 0
+    },{
+      value: 1
+    },{
+      value: 2
+    },{
+      value: 3
+    },{
+      value: 4
+    },{
+      value: 5
+    },{
+      value: 6
+    },{
+      value: 7
+    },{
+      value: 8
+    },{
+      value: 9
+    },{
+      value: 10
+    }]
+    const provider = [{
+      value: 'Softbank'
+    },{
+      value: 'Kddi'
+    },{
+      value: 'Uq'
+    },{
+      value: 'Docomo'
+    },{
+      value: 'R'
+    }]
     return (
       <View style={Wrap}>
         <HeaderCustom title={this.props.title} backTo={()=>Actions.promotion()} back={true}/>
@@ -77,52 +113,60 @@ class UpgradeToPro extends Component {
         
         <Content style={{paddingTop:30,paddingHorizontal:15}}>
           <Form>
-            <Label style={{color:'#3B4859'}}>Number of family members</Label>
+            <Label style={{color:'#3B4859'}}>Number of family members {/*this.refs.familyMember.value()*/}</Label>
             <Item style={FormStyle.Item}>
               <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
                 style={{ flex: 1 }}
                 itemStyle={{backgroundColor:'#fff'}}
-                placeholder="Please select"
+                placeholder="Please select ?"
                 placeholderStyle={{ color: "#3B4859" }}
                 placeholderIconColor="#3B4859"
                 selectedValue={this.state.selected2}
                 onValueChange={this.onValueChange2.bind(this)}
               >
-                <Picker.Item label="0" value="0" />
-                <Picker.Item label="1" value="1" />
-                <Picker.Item label="2" value="2" />
-                <Picker.Item label="3" value="3" />
-                <Picker.Item label="4" value="4" />
-                <Picker.Item label="5" value="5" />
-                <Picker.Item label="6" value="6" />
-                <Picker.Item label="7" value="7" />
-                <Picker.Item label="8" value="8" />
-                <Picker.Item label="9" value="9" />
-                <Picker.Item label="10" value="10" />
+              {
+                  NumberFam.map(item => {
+                    return(
+                      <Picker.Item label={item.value} value={item.value} />
+                    )
+                  })
+                }
               </Picker>
+              {/* <Dropdown
+                ref='familyMember'
+                label='Favorite Fruit'
+                data={NumberFam} /> */}
             </Item>
-            <Label style={{color:'#3B4859'}}>Internet provider</Label>
-            <Item style={FormStyle.Item}>
+            <Label style={{color:'#3B4859'}}>Internet provider {/*this.refs.provider.value()*/}</Label>
+            <Item style={FormStyle.Item} >
               <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
                 style={{ flex: 1 }}
                 itemStyle={{backgroundColor:'#fff'}}
-                placeholder="Please select"
+                placeholder="Please select ?"
                 placeholderStyle={{ color: "#3B4859" }}
                 placeholderIconColor="#3B4859"
                 selectedValue={this.state.selected2}
                 onValueChange={this.onValueChange2.bind(this)}
               >
-                <Picker.Item label="Softbank" value="Softbank" />
-                <Picker.Item label="Kddi" value="Kddi" />
-                <Picker.Item label="Uq" value="Uq" />
-                <Picker.Item label="Docomo" value="Docomo" />
-                <Picker.Item label="R" value="R" />
-              </Picker>
+                {
+                  provider.map(item => {
+                    return(
+                      <Picker.Item label={item.value} value={item.value} />
+                    )
+                  })
+                }
+              </Picker> 
             </Item>
+            {/* <View>
+              <Dropdown
+                ref='provider'
+                label='Favorite Fruit'
+                data={provider} />
+            </View> */}
             <Label style={{color:'#3B4859'}}>Your address</Label>
             <Item style={FormStyle.Item}>
               <Input />

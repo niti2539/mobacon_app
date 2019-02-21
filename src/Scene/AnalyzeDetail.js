@@ -4,7 +4,8 @@ import CardDetail from './Components/CardDetail'
 import Header from './Components/Header'
 import { Wrap, FooterStyle, FooterBtn } from '../../asset/StyleSheet/CommonStyle'
 import { connect } from 'react-redux';
-import { GetLastReview } from '../Controller/ReviewController'
+import { GetLastReview, LikeDislikeReview } from '../Controller/ReviewController'
+import { Actions } from 'react-native-router-flux'
 
 class AnalyzeDetail extends Component {
   constructor(props) {
@@ -34,41 +35,51 @@ class AnalyzeDetail extends Component {
       }
     };
   }
-async componentDidMount(){
-  let data = await GetLastReview();
-  let dataShow = {};
-  if(data.status == false){
-    return false;
-  } else {
-    data = data.data.data;
-    dataShow = {
-      header:['OFFER NAME','$' + data.amount ,'/ month'],
-      Item:[
-          {
-              title:'MINUTES',
-              value: data.bill.used.minutes + ' / month'
-          },
-          {
-              title:'SMS',
-              value: data.bill.used.sms + ' / month'
-          },
-          {
-              title:'INTERNET TRAFFIC',
-              value: data.bill.used.internet + ' / month'
-          }
-      ],
-      offer: {
-        review: data.offer.review,
-        suggestion: data.offer.suggestion,
-        liked: data.offer.liked,
+
+  async getReview() {
+    return await GetLastReview();
+  }
+
+  async likeDislikeReview() {
+    return await LikeDislikeReview(this.state.data.id,this.props.Global.AnalyzeReview.like);
+  }
+
+  componentDidMount(){
+    this.getReview().then(data=> {
+      let dataShow = {};
+      if(data.status == false) return false;
+      data = data.data;
+      dataShow = {
+        header:['OFFER NAME','$' + data.bill.amount ,'/ month'],
+        Item:[
+            {
+                title:'MINUTES',
+                value: data.bill.used.minutes + ' / month'
+            },
+            {
+                title:'SMS',
+                value: data.bill.used.sms + ' / month'
+            },
+            {
+                title:'INTERNET TRAFFIC',
+                value: data.bill.used.internet + ' / month'
+            }
+        ],
+        offer: data.offer
       }
-    }
-    this.setState({
-      data: data,
-      dataShow: dataShow
+      // console.log(data);
+      // console.log(dataShow);
+      this.setState({
+        data: data,
+        dataShow: dataShow
+      })
     })
-  } 
-}
+  }
+
+  componentWillUnmount(){
+    this.likeDislikeReview()
+  }
+
 
   render() {
     

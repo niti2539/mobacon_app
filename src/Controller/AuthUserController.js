@@ -1,8 +1,9 @@
 import AuthUserModel from '../Models/AuthUserModel'
-import store from '../Store/index'
+import { store } from '../Store/index'
 import { AsyncStorage } from "react-native"
 
 export const LoginAction = async (phoneNumber,password) => {
+
     let data = await AuthUserModel.Login(phoneNumber,password);
     if(data.status){
         data = data.data;
@@ -74,9 +75,20 @@ export const LogoutAction = async () => {
             token : '',
             phone : ''
         }});
+    }else{
+        TokenTimeOut();
     }
 
     return res.status;
+}
+
+export const TokenTimeOut = async () => {
+    store.dispatch({type:'SET_AUTH',payload:{
+        status : false,
+        info: {},
+        token : '',
+        phone : ''
+    }});
 }
 
 export const ForgetPasswordAction = async (phoneNumber) => {

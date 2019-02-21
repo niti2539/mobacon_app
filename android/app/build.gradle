@@ -101,8 +101,8 @@ android {
 
     defaultConfig {
         applicationId "com.mobacon"
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
@@ -150,6 +150,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-notifications')
     compile project(':react-native-iap')
     compile project(':react-native-image-picker')
     compile project(':react-native-svg')

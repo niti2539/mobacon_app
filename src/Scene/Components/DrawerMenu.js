@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux'
 import { StyleSheet } from "react-native";
 import { Container, Content, List, ListItem, Text } from 'native-base';
-import store from '../../Store/index'
+import { store } from '../../Store/index'
 import {Wrap,FooterStyle} from '../../../asset/StyleSheet/CommonStyle'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { LogoutAction } from '../../Controller/AuthUserController'
@@ -84,7 +84,9 @@ export default class DrawerMenu extends Component {
                     <ListItem
                         last
                         button
-                        onPress={() => {if(LogoutAction()) Actions.login()}}>
+                        onPress={() => {
+                            LogoutAction().then(() => Actions.login())
+                        }}>
                         <Text style={style.text}>LOGOUT</Text>
                     </ListItem>
                 </List>
