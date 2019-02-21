@@ -5,8 +5,13 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+<<<<<<< HEAD
     "android": "react-native run-android",
     "ios": "react-native run-ios"
+=======
+    "android": "npm run start && react-native run-android",
+    "ios": "npm run start && react-native run-ios"
+>>>>>>> d9e8927cc5131c6a086cb1a35a1a16a63dab58e2
   },
   "dependencies": {
     "native-base": "^2.8.1",
