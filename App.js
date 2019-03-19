@@ -27,27 +27,27 @@ export default class App extends Component {
     //   extra: "data"
     // });
 
-    // DeviceEventEmitter.removeAllListeners('hardwareBackPress')
-    // DeviceEventEmitter.addListener('hardwareBackPress', () => {
-    //   try {
-    //     isSignedIn().then(res => {
-    //       if(res){
-    //         Actions.home();
-    //       }else{
-    //         Actions.login();
-    //       }
-    //     })
+    DeviceEventEmitter.removeAllListeners('hardwareBackPress')
+    DeviceEventEmitter.addListener('hardwareBackPress', () => {
+      try {
+        isSignedIn().then(res => {
+          if(res){
+            Actions.home();
+          }else{
+            Actions.login();
+          }
+        })
         
-    //     return true;
-    //   }
-    //   catch (err) {
-    //     // Alert(err);
-    //     BackHandler.exitApp()
-    //     // return false;
-    //   }
-    // })
+        return true;
+      }
+      catch (err) {
+        // Alert(err);
+        BackHandler.exitApp()
+        // return false;
+      }
+    })
 
-    // new InitialApp();
+    new InitialApp();
   }
 
   randerLoading = () => {
@@ -63,19 +63,13 @@ export default class App extends Component {
   }
 
   render() {
-    <View>
-      ทดสอบการ run app
-    </View>
+    return (
+      <Provider store={ store }>
+        <PersistGate loading={ this.randerLoading() } persistor={ persistor }>
+          <Route/>
+        </PersistGate>
+      </Provider>
+    );
   }
-
-  // render() {
-  //   return (
-  //     <Provider store={ store }>
-  //       <PersistGate loading={ this.randerLoading() } persistor={ persistor }>
-  //         <Route/>
-  //       </PersistGate>
-  //     </Provider>
-  //   );
-  // }
 }
 
