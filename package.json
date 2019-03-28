@@ -9,6 +9,7 @@
     "ios": "react-native run-ios"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "native-base": "^2.8.1",
     "react": "16.3.1",
     "react-native": "0.55.4",
@@ -19,6 +20,7 @@
     "react-native-linear-gradient": "^2.4.2",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-notifications": "^1.1.23",
+    "react-native-push-notification": "^3.1.2",
     "react-native-router-flux": "^4.0.4",
     "react-native-svg": "^8.0.8",
     "react-native-svg-charts": "^5.2.0",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "babel-preset-expo": "^5.1.1",
     "babel-preset-react-native": "4.0.1",
     "firebase": "^5.5.3",
     "jest": "23.6.0",
