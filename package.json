@@ -12,6 +12,7 @@
     "native-base": "^2.8.1",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-chart-kit": "^2.4.0",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-iap": "^2.4.0-beta4",
     "react-native-image-picker": "^0.27.2",

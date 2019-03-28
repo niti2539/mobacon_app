@@ -10,7 +10,7 @@ import {isSignedIn} from './src/Controller/AuthUserController'
 
 // import { NotificationsAndroid, PendingNotifications } from 'react-native-notifications';
 
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader','Setting a timer']);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader','Setting a timer', 'Warning: isMounted(...) is deprecated in plain JavaScript React classes. Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks.']);
 
 // function onNotificationOpened(notification) {
 //   console.log("onNotificationOpened: ", notification);
