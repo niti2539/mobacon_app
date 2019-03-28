@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import CardReport from "./Components/CardReport";
 import HeaderCustom from "./Components/Header";
+import _ from "lodash";
 import {
   Wrap,
   FooterStyle,
@@ -56,17 +57,38 @@ class ReportHistory extends Component {
       "Nov",
       "Dec"
     ];
-    reportHistory.data = _.orderBy(reportHistory.data, ['emissionAt'], 'desc').slice(0, 2);
+    reportHistory.data = _.orderBy(
+      reportHistory.data,
+      ["emissionAt"],
+      "desc"
+    ).slice(0, 2);
     reportHistory.data.forEach(obj => {
       let date = new Date(obj.emissionAt);
       // console.log('date', date, date.getMonth());
-      let newObj = {
+      // let newObj = {
+      //   name: monthNames[date.getMonth()],
+      //   value: {obj.used}
+      // };
+      const value = 5000;
+      let newObj = () => ({
         name: monthNames[date.getMonth()],
-        value: obj.used
-      };
-      result.push(newObj);
+        // value: {obj.used}
+        value: {
+          minutes: Math.random() * value,
+          sms: Math.random() * value,
+          internet: Math.random() * value
+        }
+      });
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
+      result.push(newObj());
     });
-    console.log('result', result);
+    console.log("result", result);
     this.setState({ data: result });
   };
 

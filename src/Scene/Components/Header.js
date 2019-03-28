@@ -25,7 +25,7 @@ export default class HeaderCustom extends Component {
                 </Button>
             </Left>
             <Body style={{flex: 1}} >
-                <Title style={{alignSelf:'center'}}>{this.props.title}</Title>
+                <Title style={{alignSelf:'center', color: '#fff'}}>{String(this.props.title).toUpperCase()}</Title>
             </Body>
             <Right style={{flex: 0}} />
         </Header>
