@@ -22,6 +22,10 @@ export default class DrawerMenu extends Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    console.log('this.props', this.props);
+  }
+
   render() {
     return (
       <Container

@@ -109,12 +109,12 @@ export class Route extends Component {
               title="ReportHistory"
               hideNavBar
             />
-            <Scene
+            {/* <Scene
               key="ReportHistoryDetail"
               component={ReportHistoryDetail}
               title="ReportHistoryDetail"
               hideNavBar
-            />
+            /> */}
           </Scene>
         </Scene>
       </Router>

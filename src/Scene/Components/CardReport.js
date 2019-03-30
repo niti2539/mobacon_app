@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { Content, Card, CardItem, Text, Body, Item } from "native-base";
 import { Button } from "react-native-elements";
+import { BarChart, Grid, YAxis, XAxis } from "react-native-svg-charts";
 import {
-  BarChart,
-  LineChart,
-  Grid,
-  YAxis,
-  XAxis
-} from "react-native-svg-charts";
-import { LinearGradient, Stop, Defs, G } from "react-native-svg";
+  LinearGradient,
+  Stop,
+  Defs,
+  G,
+  Text as TextSvg,
+  TSpan
+} from "react-native-svg";
 import { View, Dimensions, LayoutAnimation, UIManager } from "react-native";
 import { Actions } from "react-native-router-flux";
+import _ from "lodash";
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -24,9 +26,9 @@ export default class CardReport extends Component {
     };
   }
 
-  onChangeChart(reportFor) {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    this.setState({
+  async onChangeChart(reportFor) {
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    await this.setState({
       reportFor
     });
   }
@@ -40,13 +42,47 @@ export default class CardReport extends Component {
     }
   };
 
+  yMin = 0;
+  yMax = 5000;
+
   render() {
     const { reportFor, data } = this.state;
+    const { yMax, yMin } = this;
     const contentInset = { top: 20, bottom: 20 };
-    const yMin = 0,
-      yMax = 10000;
-    const fill = "rgb(134, 65, 244)";
-
+    const Labels = ({ x, y, bandwidth, data }) => {
+      const CUT_OFF = yMax;
+      // console.log("Cut off", CUT_OFF);
+      return data.map((value, index) => {
+        const val = value.info.value[reportFor];
+        const key = btoa(index + val);
+        return (
+          <G key={key + index}>
+            <TextSvg
+              x={x(index) + bandwidth / 2}
+              y={val < CUT_OFF ? y(val) - 10 : y(val) + 15}
+              fontSize={14}
+              stroke="white"
+              strokeWidth={0.2}
+              fill={val >= CUT_OFF ? "white" : "#acacac"}
+              alignmentBaseline={"middle"}
+              textAnchor={"middle"}
+            >
+              <TSpan>{val}</TSpan>
+            </TextSvg>
+            <TextSvg
+              x={x(index) + bandwidth / 2}
+              y={val < CUT_OFF ? y(val) + 15 : y(val) + 35}
+              fontSize={16}
+              fill="#fff"
+              alignmentBaseline={"middle"}
+              textAnchor={"middle"}
+            >
+              <TSpan>{value.info.name}</TSpan>
+            </TextSvg>
+          </G>
+        );
+      });
+    };
     const Gradient = () => (
       <G>
         <Defs key={"gradient"}>
@@ -60,7 +96,7 @@ export default class CardReport extends Component {
             <Stop offset={"0%"} stopColor={"#76D5CE"} />
             <Stop offset={"100%"} stopColor={"#5FB2AE"} />
           </LinearGradient>
-        </Defs>{" "}
+        </Defs>
       </G>
     );
     return (
@@ -146,7 +182,7 @@ export default class CardReport extends Component {
           </CardItem>
           {/* <Text>{JSON.stringify(data)}</Text> */}
 
-          {/* {data.length > 0 && (
+          {data.length > 0 && (
             <CardItem
               header
               padder
@@ -155,9 +191,9 @@ export default class CardReport extends Component {
               <View
                 style={{
                   height: 400,
-                  paddingVertical: 33,
-                  flexDirection: "row",
-                  alignItems: "flex-start"
+                  paddingVertical: 15,
+                  flexDirection: "row"
+                  // alignItems: "flex-start"
                 }}
               >
                 <YAxis
@@ -172,59 +208,28 @@ export default class CardReport extends Component {
                 >
                   <Gradient />
                 </YAxis>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, marginLeft: 4 }}>
                   <BarChart
                     style={{ width: "100%", height: "100%" }}
                     data={data}
-                    yAccessor={({ item }) => item.value[reportFor]}
-                    xAccessor={({ item }) => item.name}
-                    clamp={true}
+                    yAccessor={({ item }) => item.info.value[reportFor]}
+                    xAccessor={({ item }) => item.info.name}
+                    yMax={yMax}
+                    yMin={yMin}
                     contentInset={contentInset}
-                    svg={{ fill: "url(#gradient)", width: 50 }}
+                    svg={{
+                      fill: "url(#gradient)"
+                    }}
                   >
                     <Gradient />
                     <Grid />
+                    <Labels />
                   </BarChart>
                 </View>
               </View>
             </CardItem>
-          )} */}
+          )}
         </Card>
-        {data.length > 0 && (
-          <View
-            style={{
-              height: 400,
-              // padding: 33,
-              flexDirection: "row"
-              // alignItems: "flex-start"
-            }}
-          >
-            <YAxis
-              data={data}
-              // numberOfTicks={10}
-              svg={{
-                fill: "url(#gradient)"
-              }}
-              min={yMin}
-              max={yMax}
-              contentInset={contentInset}
-            >
-              <Gradient />
-            </YAxis>
-            <BarChart
-							style={{flex: 1, marginLeft: 4}}
-              data={data}
-              yAccessor={({ item }) => item.value[reportFor]}
-              xAccessor={({ item }) => item.name}
-              clamp={true}
-              contentInset={contentInset}
-              svg={{ fill: "url(#gradient)", width: 20 }}
-            >
-              <Gradient />
-              <Grid />
-            </BarChart>
-          </View>
-        )}
       </Content>
     );
   }

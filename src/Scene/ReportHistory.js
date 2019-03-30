@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { DialogComponent } from "react-native-dialog-component";
 import CardReport from "./Components/CardReport";
 import HeaderCustom from "./Components/Header";
 import _ from "lodash";
+import moment from "moment";
 import {
   Wrap,
   FooterStyle,
   FooterBtn
 } from "../../asset/StyleSheet/CommonStyle";
+import ReportHistoryDetail from "./ReportHistoryDetail";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 
@@ -32,9 +35,52 @@ class ReportHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      detailData: null
     };
   }
+
+  onClickSVG = async data => {
+    console.log("data", data.emissionAt);
+    await this.setState({ detailData: this.createDetailData(data) });
+    if (!("show" in this.dialog)) return;
+    this.dialog.show();
+    // this.props.navigation.navigate()
+    // Actions.ReportHistoryDetail({ data });
+    // Actions.drawerMenu({ data });
+  };
+
+  createDetailData = rawData => {
+    console.log("raw data", rawData);
+    const { minutes, sms, internet } = rawData.value;
+    const { emissionAt } = rawData;
+    const date = moment(emissionAt);
+    const startMonth = date.startOf("month").format("DD MMM");
+    const endMonth = date.endOf("month").format("DD MMM");
+    const data = {
+      header: ["PERIOD ANALYZED", `${startMonth} - ${endMonth}`, ""]
+    };
+    data.item = [
+      {
+        title: "MINUTES USED",
+        value: minutes
+      },
+      {
+        title: "SMS SENT",
+        value: sms
+      },
+      {
+        title: "INTERNET TRAFFIC USED",
+        value: `${(Number(internet) / 1000).toFixed(2)} GB`
+      }
+    ];
+    console.log("reformat data", data);
+    return data;
+  };
+
+  clearDetailData = () => {
+    this.setState({ detailData: null });
+  };
 
   componentDidMount = async () => {
     let id = this.props.AuthUserReducer.info.plan.id;
@@ -63,32 +109,51 @@ class ReportHistory extends Component {
       "desc"
     ).slice(0, 2);
     reportHistory.data.forEach(obj => {
-      let date = new Date(obj.emissionAt);
+      let date = moment(obj.emissionAt);
+      // const value = 5100;
+      // const min = 3000;
       // console.log('date', date, date.getMonth());
-      // let newObj = {
-      //   name: monthNames[date.getMonth()],
-      //   value: {obj.used}
-      // };
-      const value = 5000;
-      let newObj = () => ({
-        name: monthNames[date.getMonth()],
-        // value: {obj.used}
-        value: {
-          minutes: Math.random() * value,
-          sms: Math.random() * value,
-          internet: Math.random() * value
-        }
+      let getData = (month = 0) => ({
+        // name: monthNames[month - 1],
+        // // value: {obj.used}
+        // value: {
+        //   minutes: Math.floor(Math.random() * (value - min)) + min,
+        //   sms: Math.floor(Math.random() * (value - min)) + min,
+        //   internet: Math.floor(Math.random() * (value - min)) + min
+        // },
+        // emissionAt: moment(date).month(month-1)
+        name: monthNames[date.month()],
+        value: obj.used,
+        emissionAt: date
       });
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
-      result.push(newObj());
+      let newObj = {
+        info: getData(),
+        svg: {
+          onPress: () => {
+            this.onClickSVG(getData());
+          }
+        }
+      };
+
+      // let newObj = month => ({
+      //   info: getData(month),
+      //   svg: {
+      //     onPress: () => {
+      //       this.onClickSVG(getData(month));
+      //     }
+      //   }
+      // });
+      result.push(newObj);
+
+      // result.push(newObj(1));
+      // result.push(newObj(2));
+      // result.push(newObj(3));
+      // result.push(newObj(4));
+      // result.push(newObj(5));
+      // result.push(newObj);
+      // result.push(newObj);
     });
-    console.log("result", result);
+    // console.log("result", result);
     this.setState({ data: result });
   };
 
@@ -98,9 +163,22 @@ class ReportHistory extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, detailData } = this.state;
     return (
       <View style={Wrap}>
+        <DialogComponent
+          ref={r => {
+            this.dialog = r;
+          }}
+          onDismissed={this.clearDetailData}
+          dialogStyle={styles.dialogStyle}
+        >
+          <SafeAreaView>
+            <View>
+              {detailData && <ReportHistoryDetail data={detailData} />}
+            </View>
+          </SafeAreaView>
+        </DialogComponent>
         <HeaderCustom
           title={this.props.title}
           backTo={() => Actions.home()}
@@ -111,6 +189,15 @@ class ReportHistory extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  dialogStyle: {
+    width: "90%",
+    maxWidth: 500,
+    borderRadius: 10,
+    backgroundColor: "transparent"
+  }
+});
 
 const MapStateToProps = state => {
   return state;
