@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { YellowBox, BackHandler, DeviceEventEmitter, View, Alert, AsyncStorage, ActivityIndicator } from 'react-native';
+import { YellowBox, BackHandler, DeviceEventEmitter, Platform, View, Alert, AsyncStorage, ActivityIndicator } from 'react-native';
 import { store, persistor } from './src/Store/index';
 import { PersistGate } from 'redux-persist/integration/react'
 import Route from './src/Router'
 import InitialApp from './src/Controller/InitialController';
 import { Actions } from 'react-native-router-flux'
 import {isSignedIn} from './src/Controller/AuthUserController'
+import PushNotification from 'react-native-push-notification';
 
 // import { NotificationsAndroid, PendingNotifications } from 'react-native-notifications';
 
@@ -16,6 +17,21 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 //   console.log("onNotificationOpened: ", notification);
 // }
 // NotificationsAndroid.setNotificationOpenedListener(onNotificationOpened);
+
+// PushNotification.configure({
+//   onRegister: (token) => {
+//     alert('Register notification')
+//     console.log('register notification token', token);
+//   },
+//   onNotification: function(notification) {
+//     console.log( 'NOTIFICATION:', notification );
+
+//     // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
+//     if(Platform.OS == 'ios') {
+//       notification.finish(PushNotificationIOS.FetchResult.NoData);
+//     }
+// },
+// })
 
 export default class App extends Component {
 
