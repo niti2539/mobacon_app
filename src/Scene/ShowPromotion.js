@@ -14,7 +14,7 @@ class ShowPromotion extends Component {
     render() {
       return (
         <View style={Wrap}>
-          <HeaderCustom title={this.props.title} backTo={()=>Actions.home()} back={true} />
+          <HeaderCustom title={this.props.title} menu />
           <CardPromotion/>
           <View style={FooterStyle}>
             <Button title='UPGRADE TO PRO' buttonStyle={FooterBtn}

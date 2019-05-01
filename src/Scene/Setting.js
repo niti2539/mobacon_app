@@ -75,7 +75,7 @@ class Setting extends Component {
   render() {
     return (
       <View style={Wrap}>
-          <HeaderCustom title={this.props.title} backTo={()=>Actions.home()} back />
+          <HeaderCustom title={this.props.title} menu />
           <Content>
             <View style={{padding:12}}>
               <Form>

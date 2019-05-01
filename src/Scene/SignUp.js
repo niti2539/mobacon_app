@@ -71,7 +71,6 @@ class SignUp extends Component {
       <View style={Wrap}>
         <HeaderCustom title={this.props.title} menu={false} back={true} backTo={()=>Actions.login()}/>
         <Content>
-
           <View>
             <Text
               style={{

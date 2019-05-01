@@ -25,6 +25,10 @@ export default class CardDetail extends Component {
     };
   }
 
+  componentDidMount = () => {
+    console.log('offet', this.props.data);
+  }
+
   async onReviewChange(text) {
     await this.setState({ Review: text });
     store.dispatch({

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Actions } from "react-native-router-flux";
 import { StyleSheet, SafeAreaView } from "react-native";
-import { Container, Content, List, ListItem, Text } from "native-base";
+import { Container, Content, List, ListItem, Text, Icon } from "native-base";
 import { store } from "../../Store/index";
 import { Wrap, FooterStyle } from "../../../asset/StyleSheet/CommonStyle";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import { LogoutAction } from "../../Controller/AuthUserController";
 
 function MenuIcon({ name, style, ...rest }) {
   return (
     <Icon
+      type="FontAwesome5"
       name={name}
       {...rest}
       style={{ color: "#fff", fontSize: 18, marginRight: 10, ...style }}
@@ -23,8 +23,8 @@ export default class DrawerMenu extends Component {
   }
 
   componentDidMount = () => {
-    console.log('this.props', this.props);
-  }
+    console.log("this.props", this.props);
+  };
 
   render() {
     return (

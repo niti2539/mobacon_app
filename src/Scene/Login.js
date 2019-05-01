@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 import FormStyle from '../../asset/StyleSheet/FormStyle';
 import { Wrap, FooterStyle, FooterBtn } from '../../asset/StyleSheet/CommonStyle';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { LoginAction } from '../Controller/AuthUserController';
 import { Content, Form, Item, Input, Label } from 'native-base';
 import HeaderCustom from './Components/Header'

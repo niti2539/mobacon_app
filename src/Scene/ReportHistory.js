@@ -84,7 +84,7 @@ class ReportHistory extends Component {
 
   componentDidMount = async () => {
     let id = this.props.AuthUserReducer.info.plan.id;
-    let planPro = id == 2 ? true : false;
+    let planPro = id === 2;
     if (!planPro) Actions.promotion();
 
     const reportHistory = await this.callGetHistory();
@@ -181,8 +181,7 @@ class ReportHistory extends Component {
         </DialogComponent>
         <HeaderCustom
           title={this.props.title}
-          backTo={() => Actions.home()}
-          back={true}
+          menu
         />
         <CardReport data={data} />
       </View>

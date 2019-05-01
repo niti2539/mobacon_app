@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Content, Card, CardItem, Text, Body, Item } from "native-base";
-import { Button } from "react-native-elements";
+import { Content, Card, CardItem, Text, Body, Button } from "native-base";
 import { BarChart, Grid, YAxis, XAxis } from "react-native-svg-charts";
 import {
   LinearGradient,
@@ -10,7 +9,13 @@ import {
   Text as TextSvg,
   TSpan
 } from "react-native-svg";
-import { View, Dimensions, LayoutAnimation, UIManager } from "react-native";
+import {
+  View,
+  Dimensions,
+  LayoutAnimation,
+  UIManager,
+  StyleSheet
+} from "react-native";
 import { Actions } from "react-native-router-flux";
 import _ from "lodash";
 
@@ -54,7 +59,7 @@ export default class CardReport extends Component {
       // console.log("Cut off", CUT_OFF);
       return data.map((value, index) => {
         const val = value.info.value[reportFor];
-        const key = btoa(index + val);
+        const key = "TextSvg" + index + "" + value;
         return (
           <G key={key + index}>
             <TextSvg
@@ -132,52 +137,63 @@ export default class CardReport extends Component {
             {/* <Text style={{alignSelf:'center',fontSize:19,textAlign:'center',color:'#fff',marginBottom:10}}>LAST {this.props.data.length} MONTHS{'\n'}</Text> */}
             <Body
               style={{
-                alignSelf: "center",
+                flex: 1,
                 flexDirection: "row",
-                flexWrap: "wrap",
-                marginLeft: -15,
-                marginRight: -15
+                marginLeft: -10,
+                marginRight: -10
               }}
             >
               <Button
-                title="MINUTES"
-                fontSize={12}
-                borderRadius={16}
-                outline={reportFor !== "minutes"}
-                backgroundColor="#76D5CE"
-                buttonStyle={{
-                  paddingHorizontal: 18,
-                  paddingVertical: 9,
-                  flex: 1
-                }}
+                color="#76D5CE"
+                style={[
+                  styles.button,
+                  reportFor === "minutes"
+                    ? { backgroundColor: "#76d5ce" }
+                    : {
+                        backgroundColor: "transparent",
+                        borderColor: "#76d5ce",
+                        borderWidth: 1,
+                        borderStyle: "solid"
+                      }
+                ]}
                 onPress={() => this.onChangeChart("minutes")}
-              />
+              >
+                <Text style={styles.buttonText}>minutes</Text>
+              </Button>
               <Button
-                title="SMS"
-                fontSize={12}
-                borderRadius={16}
-                outline={reportFor !== "sms"}
-                backgroundColor="#76D5CE"
-                buttonStyle={{
-                  paddingHorizontal: 32,
-                  paddingVertical: 9,
-                  flex: 1
-                }}
+                color="#76D5CE"
+                style={[
+                  styles.button,
+                  reportFor === "sms"
+                    ? { backgroundColor: "#76d5ce" }
+                    : {
+                        backgroundColor: "transparent",
+                        borderColor: "#76d5ce",
+                        borderWidth: 1,
+                        borderStyle: "solid"
+                      }
+                ]}
                 onPress={() => this.onChangeChart("sms")}
-              />
+              >
+                <Text style={styles.buttonText}>sms</Text>
+              </Button>
               <Button
-                title="DATA"
-                fontSize={12}
-                borderRadius={16}
-                outline={reportFor !== "internet"}
-                backgroundColor="#76D5CE"
-                buttonStyle={{
-                  paddingHorizontal: 30,
-                  paddingVertical: 9,
-                  flex: 1
-                }}
+                color="#76D5CE"
+                style={[
+                  styles.button,
+                  reportFor === "internet"
+                    ? { backgroundColor: "#76d5ce" }
+                    : {
+                        backgroundColor: "transparent",
+                        borderColor: "#76d5ce",
+                        borderWidth: 1,
+                        borderStyle: "solid"
+                      }
+                ]}
                 onPress={() => this.onChangeChart("internet")}
-              />
+              >
+                <Text style={styles.buttonText}>data</Text>
+              </Button>
             </Body>
           </CardItem>
           {/* <Text>{JSON.stringify(data)}</Text> */}
@@ -234,3 +250,17 @@ export default class CardReport extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 100
+  },
+  buttonText: {
+    fontSize: 12,
+    flex: 1,
+    textAlign: "center"
+  }
+});
