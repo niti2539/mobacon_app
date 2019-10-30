@@ -1,4 +1,5 @@
 import API_URL from '../ApiProvider'
+import { Alert } from 'react-native'
 
 const SignUp = ( userName, phoneNumber, password ) => {
     return fetch(API_URL.SignUp,{
@@ -12,8 +13,18 @@ const SignUp = ( userName, phoneNumber, password ) => {
             phoneNumber : phoneNumber,
             password : password   
         })
-    }).then(res => { return (!res.ok) ? { status : false } : res.json() }).then(resJson => {
-        if(resJson.status == false) return { status : false };
+    }).then(resJson => {
+        if (!resJson.ok) {
+            if(resJson.status === 401) {
+                Alert.alert('Information', 'Phone number is already taken');
+            } else {
+                Alert.alert('Information', 'Information is missing');
+            }
+            return {
+                status: false
+            };
+
+        }
         return {
             status : true,
             message : resJson.data
@@ -67,7 +78,10 @@ const Login = ( phoneNumber , password  ) => {
             password : password
         })
     }).then(res => { return (!res.ok) ? { status : false } : res.json() }).then(resJson => {
-        if(resJson.status == false) return { status : false };
+        if(resJson.status == false) {
+            Alert.alert('Incorrect', 'Username or Password is incorrect!');
+            return { status : false };
+        } 
         return {status: true , data : resJson};
     }).catch(err => {
         console.error(err)
