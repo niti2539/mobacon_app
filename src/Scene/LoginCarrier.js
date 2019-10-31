@@ -19,20 +19,31 @@ class LoginCarrier extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isEnabled: false,
     };
   }
 
+  enableAnalyseButton = (url) => {
+    if (url.toLowerCase().includes('billitems')) {
+      this.setState({isEnabled: true})
+    }
+  }
+
   _onNavigationStateChange(webViewState){
+    this.enableAnalyseButton(webViewState.url);
     this.setState({url: webViewState.url});
   }
 
   onGetRawHTLM(){
     fetch(this.state.url,{
       method: 'GET'
-    }).then(res => res.text()).then(string=>console.log(string));
+    }).then(res => res.text()).then(string=> {
+      Alert.alert('Already sent your request to the server');
+    });
   }
 
   render() {
+    const { isEnabled } = this.state;
     return (
       <View style={Wrap}>
         <HeaderCustom title={this.props.title} menu />
@@ -64,18 +75,20 @@ class LoginCarrier extends Component {
           
         </View>
         */}
-        <View style={FooterStyle}>
-          <Button title="ANALYZE MY BILL" buttonStyle={{
-            marginTop:0,
-            backgroundColor: '#5FB2AE',
-            width: '100%',
-            height: 58,
-            borderRadius: 5
-          }}
-          onPress={()=>{this.onGetRawHTLM()}}
-          />
-        </View>
-       
+        {isEnabled && 
+          <View style={FooterStyle}>
+            <Button title="ANALYZE MY BILL" buttonStyle={{
+              marginTop:0,
+              backgroundColor: '#5FB2AE',
+              width: '100%',
+              height: 58,
+              borderRadius: 5
+            }}
+            onPress={()=>{this.onGetRawHTLM()}}
+            />
+          </View>
+        }
+      
        
       </View>
     );

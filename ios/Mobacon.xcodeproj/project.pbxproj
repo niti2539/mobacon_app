@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -57,6 +58,7 @@
 		8674C436B52B4E0984B86F1B /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8C204D293D445A38E32CA99 /* EvilIcons.ttf */; };
 		8D41D77882D64080B4B480F6 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 747855A472AD41FD80269EC4 /* libRealmReact.a */; };
 		951BE453FC9945E88BF2897B /* libRNBackgroundJob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B91916F7FA4F4982190EF0 /* libRNBackgroundJob.a */; };
+		96C614DBED8B4D1EB7D33A3F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE223A3D15E24FD8942B8EE0 /* libRCTOneSignal.a */; };
 		A62DE47F4AFD434CBEDDB1FF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D09C0A4EA14E1083EE8319 /* libc++.tbd */; };
 		AA74813F36D54E4C8FBFA82D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9969F6DA00314611B805C4DB /* Entypo.ttf */; };
 		AC0F6483421D453BA57D8F89 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B6C4DE239614266AEF8E334 /* Ionicons.ttf */; };
@@ -69,7 +71,6 @@
 		E6CC837640584E658E3D7C4C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24548D09902C40E6BA08FFBD /* Zocial.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		96C614DBED8B4D1EB7D33A3F /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE223A3D15E24FD8942B8EE0 /* libRCTOneSignal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -430,6 +431,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		CADC7730235625B700930691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB7A2B82A5094B6D9E4B1F51 /* RCTOneSignal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTOneSignal;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -492,14 +500,14 @@
 		D258206EF56F415CACC3B46C /* RNBackgroundJob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundJob.xcodeproj; path = "../node_modules/react-native-background-job/ios/RNBackgroundJob.xcodeproj"; sourceTree = "<group>"; };
 		D4C1FFD606484851A9C3DA9D /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		DA0A3969F1164877B5794128 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		DB7A2B82A5094B6D9E4B1F51 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		E2CD02119EE5411C99982C6A /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		E8C204D293D445A38E32CA99 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F63169D056C746C2A1AEDAEB /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		FE223A3D15E24FD8942B8EE0 /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		FE622D55B9534F63A0223632 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		DB7A2B82A5094B6D9E4B1F51 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; name = "RCTOneSignal.xcodeproj"; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		FE223A3D15E24FD8942B8EE0 /* libRCTOneSignal.a */ = {isa = PBXFileReference; name = "libRCTOneSignal.a"; path = "libRCTOneSignal.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -642,6 +650,7 @@
 				47CEBAF60322478F9E938A9B /* libRNVectorIcons-tvOS.a */,
 				747855A472AD41FD80269EC4 /* libRealmReact.a */,
 				25B91916F7FA4F4982190EF0 /* libRNBackgroundJob.a */,
+				FE223A3D15E24FD8942B8EE0 /* libRCTOneSignal.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -899,6 +908,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CADC772D235625B600930691 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CADC7731235625B700930691 /* libRCTOneSignal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1006,6 +1023,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1044,6 +1062,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = CADC772D235625B600930691 /* Products */;
+					ProjectRef = DB7A2B82A5094B6D9E4B1F51 /* RCTOneSignal.xcodeproj */;
 				},
 				{
 					ProductGroup = 04092D32225165000037F0AC /* Products */;
@@ -1446,6 +1468,13 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CADC7731235625B700930691 /* libRCTOneSignal.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOneSignal.a;
+			remoteRef = CADC7730235625B700930691 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
