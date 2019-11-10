@@ -60,20 +60,12 @@ class AnalyzeDetail extends Component {
       if (data.status == false) return false;
       data = data.data;
       dataShow = {
-        header: ["OFFER NAME", "$" + data.bill.amount, "/ month"],
+        header: ["OFFER NAME", data.offer.review || ''],
         Item: [
           {
-            title: "MINUTES",
-            value: data.bill.used.minutes + " / month"
+            title: "suggestion",
+            value: data.offer.suggestion ? data.offer.suggestion : '',
           },
-          {
-            title: "SMS",
-            value: data.bill.used.sms + " / month"
-          },
-          {
-            title: "INTERNET TRAFFIC",
-            value: data.bill.used.internet + " / month"
-          }
         ],
         offer: data.offer
       };
@@ -81,7 +73,8 @@ class AnalyzeDetail extends Component {
       // console.log(dataShow);
       this.setState({
         data: data,
-        dataShow: dataShow
+        dataShow: dataShow, 
+        offer: data.offer,
       });
     });
   }
@@ -94,7 +87,7 @@ class AnalyzeDetail extends Component {
     return (
       <View style={Wrap}>
         <Header title={this.props.title} menu />
-        <CardDetail footer={true} data={this.state.dataShow} />
+        <CardDetail footer={true} data={this.state.dataShow} offer = {this.state.offer} />
       </View>
     );
   }

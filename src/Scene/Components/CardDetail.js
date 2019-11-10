@@ -97,7 +97,7 @@ export default class CardDetail extends Component {
             return (
               <CardItem bordered key={item.title}>
                 <Body style={{ paddingVertical: 8 }}>
-                  <Text
+                  {/* <Text
                     style={{
                       alignSelf: "center",
                       color: "#76D5CE",
@@ -105,8 +105,8 @@ export default class CardDetail extends Component {
                     }}
                   >
                     {item.title + "\n"}
-                  </Text>
-                  <Text style={{ alignSelf: "center", fontSize: 20 }}>
+                  </Text> */}
+                  <Text style={{ alignSelf: "center", fontSize: 25 }}>
                     {item.value}
                   </Text>
                 </Body>
