@@ -1,4 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import "babel-polyfill";
+import { AppRegistry } from "react-native";
+import App from "./App";
 
-AppRegistry.registerComponent('Mobacon', () => App);
+AppRegistry.registerComponent("Mobacon", () => App);
